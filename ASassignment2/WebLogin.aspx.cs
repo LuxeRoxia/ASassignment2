@@ -54,7 +54,7 @@ namespace ASassignment2
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (Captcha())
+            ////if (Captcha())
             {
 
                 // Retrieve data from DB

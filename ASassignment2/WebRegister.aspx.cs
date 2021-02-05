@@ -28,8 +28,13 @@ namespace ASassignment2
         {
 
         }
-        
+        public class Login
+        {
+            public string success { get; set; }
 
+        }
+        
+        
         public bool Captcha()
         {
             bool result = true;
@@ -61,8 +66,8 @@ namespace ASassignment2
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-
-            if (Captcha())
+            
+            //if (Captcha())
             {
                 string pwd = PwTb.Text.ToString().Trim();
                 string cfmPwd = CfmPwTb.Text.ToString().Trim();
@@ -96,14 +101,7 @@ namespace ASassignment2
                             break;
                     }
                     lbl_pwdchecker.Text = "Status : " + status;
-                    /*
-                    if (scores < 4)
-                    {
-                        lbl_pwdchecker.ForeColor = Color.Red;
-                        return;
-                    }
-                    lbl_pwdchecker.ForeColor = Color.Green;
-                    */
+                    
 
 
 

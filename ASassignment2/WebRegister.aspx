@@ -18,24 +18,34 @@
                 document.getElementById("lbl_pwdchecker").style.color = "Red";
                 return ("no_number");
             }
+            else if (str.search(/[a-z/]/) == -1) {
+                document.getElementById("lbl_pwdchecker").innerHTML = "Passowrd does not contain lowercase characters.";
+                document.getElementById("lbl_pwdchecker").style.color = "Red";
+                return ("No lowercase letters.")
+            }
+            else if (str.search(/[A-Z]/) == -1) {
+                document.getElementById("lbl_pwdchecker").innerHTML = "Password does not contain uppercase characters.";
+                document.getElementById("lbl_pwdchecker").style.color = "Red";
+                return ("No uppercase characters.")
+            }
+            else if (str.search(/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) == -1) {
+                document.getElementById("lbl_pwdchecker").innerHTML = "Password does not contain special characters.";
+                document.getElementById("lbl_pwdchecker").style.color = "Red";
+                return ("No special characters.")
+            }
             document.getElementById("lbl_pwdchecker").innerHTML = "Excellent!";
             document.getElementById("lbl_pwdchecker").style.color = "Blue";
         }
     </script>
-    <script>
-        <!-- Client side captcha! -->
-        grecaptcha.ready(function () {
-            grecaptcha.execute('6LdIB0QaAAAAAI_bImCEzOAeyeVoElU9KTxDWLNn', { action: 'Login' }).then(function (token) {
-                document.getElementById("g-recaptcha-response").value = token;
-            });
-        }); 
-    </script>
+    
+    <script src="https://www.google.com/recaptcha/api/siteverify?secret=6LdIB0QaAAAAAI_bImCEzOAeyeVoElU9KTxDWLNn"></script>
         
 
 
     <title></title>
 </head>
 <body>
+
     <form id="form1" runat="server">
         <div>
             
@@ -103,11 +113,17 @@
             <asp:Label ID="Label6" runat="server" Text="Password"></asp:Label>
                     </td>
                     <td>
-            <asp:TextBox ID="PwTb" runat="server" TextMode="Password"></asp:TextBox>
+            <asp:TextBox ID="PwTb" runat="server" TextMode="Password" onkeyup="javascript:validate()"></asp:TextBox>
                     </td>
                     <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+            
             <asp:Label ID="lbl_pwdchecker" runat="server" Text="pwdchecker"></asp:Label>
                     </td>
+                    
                 </tr>
                 <tr>
                     <td>
@@ -132,6 +148,7 @@
                     <td>
             
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Register" />
+                        <input id="g-recaptcha-response" name="g-recaptcha-response" type="hidden" />
                     </td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -139,6 +156,15 @@
             </table>
             <br />
         </div>
+        
     </form>
+    <script>
+        <!-- Client side captcha! -->
+    grecaptcha.ready(function () {
+        grecaptcha.execute('6LdIB0QaAAAAAI_bImCEzOAeyeVoElU9KTxDWLNn', { action: 'Login' }).then(function (token) {
+            document.getElementById("g-recaptcha-response").value = token;
+        });
+    });
+    </script>
 </body>
 </html>
